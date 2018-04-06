@@ -22,10 +22,8 @@ button {
 }
 
 h3 {
-  /* mh fixed; added unit rem: */
   padding-top: 1rem;
   margin-top: 3rem;
-  /* mh fixed color name: */
   border-top: solid 1px maroon; 
 }
 

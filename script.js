@@ -32,9 +32,8 @@ window.onload = function(){
 
 // Triggered on form submit. Creates a new course object and pushes it into courseList array,
 // clears content in form fields, prints courseList objects to the page.
-// BUGFIX[done]: This function isn't working properly- nothing gets output to the list on form submit. solution: add event.preventDefault()
+// BUGFIX[done]: This function isn't working properly- nothing gets output to the list on form submit.
 function addACourse(event){
-  // mh added:
   event.preventDefault();
 
   var grade = parseFloat(this.elements["grade"].value);
