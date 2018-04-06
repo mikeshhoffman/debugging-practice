@@ -52,11 +52,8 @@ function addACourse(event){
     name: this.elements["name"].value,
     grade: grade
   }
-  console.log("grade: ", grade);
 
   courseList.push(newCourse)
-  console.log("courseList: ", courseList);
-
   clearFormFields()
   outputList()
 }
@@ -96,19 +93,15 @@ function clearData(){
 
 // Prints courseList objects to the page in a readable way.
 function outputList(){
-  var list = document.getElementById("course-list");
-  console.log("outputList got called")
+  var list = document.getElementById("course-list")
   /*
     TODO[done]: Clear the existing contents of the "list" element. Then, for each object in courseList,
     create an li element that holds the course's name and grade, and append
     it to the "list" ul element.
   */
-  console.log("list: ", list)  
-  list.innerHTML = null; // or ""
+  list.innerHTML = ""
    
   for(var i=0; i < courseList.length; i++){
-    console.log("name: ", courseList[i].name, "  grade: ", courseList[i].grade)
-
     var newLi = document.createElement("li")
     newLi.innerHTML = "name: " + courseList[i].name + "  grade: " + courseList[i].grade
     list.appendChild(newLi)
