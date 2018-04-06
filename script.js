@@ -32,9 +32,13 @@ window.onload = function(){
 
 // Triggered on form submit. Creates a new course object and pushes it into courseList array,
 // clears content in form fields, prints courseList objects to the page.
-// BUGFIX: This function isn't working properly- nothing gets output to the list on form submit
-function addACourse(){
+// BUGFIX[done]: This function isn't working properly- nothing gets output to the list on form submit. solution: add event.preventDefault()
+function addACourse(event){
+  // mh added:
+  event.preventDefault();
+
   var grade = parseFloat(this.elements["grade"].value);
+
   /*
     TODO: validate that "grade" value is a number between 1.0 and 4.0, stop processing if it is not.
 
@@ -49,8 +53,10 @@ function addACourse(){
     name: this.elements["name"].value,
     grade: grade
   }
+  console.log("grade: ", grade);
 
   courseList.push(newCourse)
+  console.log("courseList: ", courseList);
 
   clearFormFields()
   outputList()
@@ -76,7 +82,10 @@ function clearGPA(){
 
 // Clears content in form fields.
 function clearFormFields(){
-  // TODO: implement this function.
+  // TODO[done]: implement this function.
+  
+  document.getElementById("add-course").reset();
+
 }
 
 // Clear out list of courses and all content shown on the page
@@ -89,9 +98,20 @@ function clearData(){
 // Prints courseList objects to the page in a readable way.
 function outputList(){
   var list = document.getElementById("course-list");
+  console.log("outputList got called")
   /*
-    TODO: Clear the existing contents of the "list" element. Then, for each object in courseList,
+    TODO[done]: Clear the existing contents of the "list" element. Then, for each object in courseList,
     create an li element that holds the course's name and grade, and append
     it to the "list" ul element.
   */
+  console.log("list: ", list)  
+  list.innerHTML = null; // or ""
+   
+  for(var i=0; i < courseList.length; i++){
+    console.log("name: ", courseList[i].name, "  grade: ", courseList[i].grade)
+
+    var newLi = document.createElement("li")
+    newLi.innerHTML = "name: " + courseList[i].name + "  grade: " + courseList[i].grade
+    list.appendChild(newLi)
+  }
 }
