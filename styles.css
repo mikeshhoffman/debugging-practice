@@ -33,3 +33,7 @@ button, input[type="submit"] {
   padding: 0.5rem;
   border: none;
 }
+
+#result {
+  margin-bottom: 0.5rem;
+}

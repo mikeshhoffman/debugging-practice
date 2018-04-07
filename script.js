@@ -39,12 +39,28 @@ function addACourse(event){
   var grade = parseFloat(this.elements["grade"].value);
 
   /*
-    TODO: validate that "grade" value is a number between 1.0 and 4.0, stop processing if it is not.
+    TODO[done]: validate that "grade" value is a number between 1.0 and 4.0, stop processing if it is not.
 
     Checking 'grade typeof "number"' will always return true because we called parseFloat.
-    We must instead check that it's value is not NaN.
+    We must instead check that its value is not NaN.
+  */
+  if (isNaN(grade)){
+    alert("Grade must be a number in the range from 1.0 to 4.0")
+    return
+  }
 
+  if ((grade < 1.0) || (grade > 4.0)){
+    alert("Grade must be in the range from 1.0 to 4.0")
+    return
+  }
+  /*
     REVIEW: could we make it doubly safe by adding an HTML validation as well?
+    Adding the "required" attribute to both input elements improves the app.
+    HTML validation, without JavaScript, has limited effectiveness, in Chrome.
+    Attempt 1: We could change the field type from text to number and add a regex pattern such as this pattern from 1.0-4.9 (but want 1.0 to 4.0) - this does force 0.1 increment and prevents entering 3.54, for example:
+    <input type="number" name="grade" id="grade" step="0.1" pattern="[-+]?[1-4]*[.,]?[0-9]+" required>
+    Attempt 2: The following allows an unlimited range, in Chrome, though constrained to increments of 0.1:
+    <input type="number" name="grade" id="grade" pattern="[1-4]" step="0.1" required>
   */
 
   // Create the new course with values from the form, push it into array of courses.
@@ -88,6 +104,7 @@ function clearFormFields(){
 function clearData(){
   courseList = []
   clearFormFields()
+  clearGPA()
   outputList()
 }
 
@@ -103,7 +120,7 @@ function outputList(){
    
   for(var i=0; i < courseList.length; i++){
     var newLi = document.createElement("li")
-    newLi.innerHTML = "name: " + courseList[i].name + "  grade: " + courseList[i].grade
+    newLi.innerHTML = "name: " + courseList[i].name + ", grade: " + courseList[i].grade
     list.appendChild(newLi)
   }
 }
